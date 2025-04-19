@@ -14,16 +14,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const app_1 = __importDefault(require("./app"));
 const config_1 = __importDefault(require("./app/config"));
-// Establish database connection
 const startServer = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        // Start Express server
         app_1.default.listen(config_1.default.port || 3000, () => {
             console.log(`Server running on port: ${config_1.default.port || 3000}`);
         });
     }
     catch (error) {
-        // Log if unable to connect to database
         console.error('Error starting server:', error);
     }
 });

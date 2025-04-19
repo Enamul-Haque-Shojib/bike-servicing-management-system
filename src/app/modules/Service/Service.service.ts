@@ -20,6 +20,12 @@ const getAllServicesFromDB = async () => {
 
 
 const getSingleServiceFromDB = async (id: string) => {
+
+    await prisma.serviceRecord.findUniqueOrThrow({
+        where: {
+            serviceId: id
+        }
+    });
     
     const result = await prisma.serviceRecord.findUnique({
         where:{
@@ -31,6 +37,11 @@ const getSingleServiceFromDB = async (id: string) => {
 };
 
 const completeServiceIntoDB = async (id: string, completionDate?: string) => {
+    await prisma.serviceRecord.findUniqueOrThrow({
+        where: {
+            serviceId: id,
+        }
+    });
     const result = await prisma.serviceRecord.update({
       where: {
         serviceId: id,

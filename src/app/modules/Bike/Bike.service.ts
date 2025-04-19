@@ -19,6 +19,12 @@ const getAllBikesFromDB = async () => {
 };
 
 const getSingleBikeFromDB = async (id: string) => {
+
+    await prisma.bike.findUniqueOrThrow({
+        where: {
+            bikeId: id
+        }
+    });
     
     const result = await prisma.bike.findUnique({
         where:{

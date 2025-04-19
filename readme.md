@@ -3,7 +3,7 @@
 A backend system for managing bike servicing operations, including customer creation, bike records, service history, and status tracking. Built with Prisma ORM and PostgreSQL, this system supports CRUD operations and status management for servicing workflows.
 
 ### 🔗 Live API
-Base URL: [https://bike-service-api.up.railway.app](https://bike-service-api.up.railway.app)
+Base URL: [https://bike-servicing-management-system.vercel.app/](https://bike-servicing-management-system.vercel.app/)
 
 ### 🛠 Tech Stack
 
@@ -13,7 +13,7 @@ Base URL: [https://bike-service-api.up.railway.app](https://bike-service-api.up.
 - Prisma ORM
 - PostgreSQL
 - tsx (for dev server)
-- Railway (deployment)
+- vercel (deployment)
 
 ### ⚙️ Setup Guide
 

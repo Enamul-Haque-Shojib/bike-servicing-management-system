@@ -20,6 +20,12 @@ const getAllCustomersFromDB = async () => {
 };
 
 const getSingleCustomerFromDB = async (id: string) => {
+
+    await prisma.customer.findUniqueOrThrow({
+        where: {
+            customerId:id,
+        }
+    });
     
     const result = await prisma.customer.findUnique({
         where:{
