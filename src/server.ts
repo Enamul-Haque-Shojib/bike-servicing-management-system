@@ -5,8 +5,8 @@ import config from './app/config';
 const startServer = async () => {
   try {
     // Start Express server
-    app.listen(config.port, () => {
-      console.log(`Server running on port: ${config.port}`);
+    app.listen(config.port || 3000, () => {
+      console.log(`Server running on port: ${config.port || 3000}`);
     });
   } catch (error) {
     // Log if unable to connect to database

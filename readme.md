@@ -19,8 +19,8 @@ Base URL: [https://bike-service-api.up.railway.app](https://bike-service-api.up.
 
 1. Clone the repo:
    ```bash
-   git clone https://github.com/yourusername/bike-service-api.git
-   cd bike-service-api
+   git clone https://github.com/Enamul-Haque-Shojib/bike-servicing-management-system.git
+   cd bike-servicing-management-system
 2. Install dependencies:
     ```bash
     npm install
