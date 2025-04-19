@@ -178,11 +178,12 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": "postgresql://postgres:123456789@localhost:5432/bike_servicing_management_system?schema=public"
+        "value": null
       }
     }
   },

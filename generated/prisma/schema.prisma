@@ -20,7 +20,38 @@ model Customer {
   email      String   @unique
   phone      String   @unique
   createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+
+  bike Bike[]
 
   @@map("customers")
+}
+
+model Bike {
+  bikeId     String          @id @default(uuid())
+  brand      String
+  model      String
+  year       Int
+  customer   Customer        @relation(fields: [customerId], references: [customerId])
+  customerId String
+  services   ServiceRecord[]
+
+  @@map("bikes")
+}
+
+model ServiceRecord {
+  serviceId      String         @id @default(uuid())
+  bike           Bike           @relation(fields: [bikeId], references: [bikeId])
+  bikeId         String
+  serviceDate    DateTime
+  completionDate DateTime?
+  description    String
+  status         ServiceStatus? @default(pending)
+
+  @@map("services")
+}
+
+enum ServiceStatus {
+  pending
+  in_progress
+  done
 }

@@ -1,15 +1,15 @@
 import app from './app';
 import config from './app/config';
 
-// Establish database connection
+
 const startServer = async () => {
   try {
-    // Start Express server
+ 
     app.listen(config.port || 3000, () => {
       console.log(`Server running on port: ${config.port || 3000}`);
     });
   } catch (error) {
-    // Log if unable to connect to database
+  
     console.error('Error starting server:', error);
   }
 };
