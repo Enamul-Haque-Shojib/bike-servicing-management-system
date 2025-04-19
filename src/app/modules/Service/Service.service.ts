@@ -58,7 +58,7 @@ const completeServiceIntoDB = async (id: string, completionDate?: string) => {
 
 
   
-  export const getOlderServicesFromDB = async () => {
+  const getOlderServicesFromDB = async () => {
     const sevenDaysAgo = new Date();
     sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
   
@@ -81,6 +81,7 @@ const completeServiceIntoDB = async (id: string, completionDate?: string) => {
   
     return result;
   };
+  
   
   
 

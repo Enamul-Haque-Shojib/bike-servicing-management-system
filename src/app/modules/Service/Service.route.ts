@@ -1,17 +1,15 @@
 import express from 'express';
-import { BikeController } from './Service.controller';
+import { ServiceRecordController } from './Service.controller';
+
+
 
 
 const router = express.Router();
 
-router.post('/', BikeController.createService);
-router.get('/', BikeController.getAllServices);
-router.get('/:id', BikeController.getSingleService);
-router.put('/:id/complete', BikeController.completeService);
-router.get('/status/older', BikeController.getOlderServices);
-
-
-
+router.post('/', ServiceRecordController.createService);
+router.get('/', ServiceRecordController.getAllServices);
+router.get('/:id', ServiceRecordController.getSingleOrOlderService);
+router.put('/:id/complete', ServiceRecordController.completeService);
 
 
 export const ServiceRoutes = router;

@@ -32,7 +32,7 @@ const getAllServices = async (req: Request, res: Response, next: NextFunction) =
         sendResponse(res, {
             statusCode: httpStatus.OK,
             success: true,
-            message: "Services fetched successfully",
+            message: "Service records fetched successfully",
             data: result
         })
     }
@@ -41,18 +41,34 @@ const getAllServices = async (req: Request, res: Response, next: NextFunction) =
     }
 };
 
-const getSingleService = async (req: Request, res: Response, next: NextFunction) => {
+const getSingleOrOlderService = async (req: Request, res: Response, next: NextFunction) => {
 
     try {
-       
-        const result = await ServicesRecordService.getSingleServiceFromDB(req.params.id)
 
-        sendResponse(res, {
-            statusCode: httpStatus.OK,
-            success: true,
-            message: "service fetched successfully",
-            data: result
-        })
+        const {id} = req.params;
+      
+
+        if(id==='status'){
+           const result = await ServicesRecordService.getOlderServicesFromDB()
+            sendResponse(res, {
+                statusCode: httpStatus.OK,
+                success: true,
+                message: "Overdue or pending services fetched successfully",
+                data: result
+            })
+        }else{
+           const result = await ServicesRecordService.getSingleServiceFromDB(req.params.id)
+            sendResponse(res, {
+                statusCode: httpStatus.OK,
+                success: true,
+                message: "service record fetched successfully",
+                data: result
+            })
+        }
+       
+        
+
+        
     }
     catch (err) {
         next(err)
@@ -79,32 +95,14 @@ const completeService = async (req: Request, res: Response, next: NextFunction) 
   };
 
 
-  const getOlderServices = async (req: Request, res: Response, next: NextFunction) => {
-
-    try {
-       
-        const result = await ServicesRecordService.getOlderServicesFromDB()
-
-        sendResponse(res, {
-            statusCode: httpStatus.OK,
-            success: true,
-            message: "Overdue or pending services fetched successfully",
-            data: result
-        })
-    }
-    catch (err) {
-        next(err)
-    }
-};
-  
 
 
 
-export const BikeController = {
+export const ServiceRecordController = {
     createService,
     getAllServices,
-    getSingleService,
+    getSingleOrOlderService,
     completeService,
-    getOlderServices
+  
 }
 

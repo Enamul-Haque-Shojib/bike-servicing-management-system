@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ServicesRecordService = exports.getOlderServicesFromDB = void 0;
+exports.ServicesRecordService = void 0;
 const prisma_1 = require("../../../../generated/prisma");
 const prisma_2 = __importDefault(require("../../shared/prisma"));
 const createServiceIntoDB = (payload) => __awaiter(void 0, void 0, void 0, function* () {
@@ -26,6 +26,11 @@ const getAllServicesFromDB = () => __awaiter(void 0, void 0, void 0, function* (
     return result;
 });
 const getSingleServiceFromDB = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    yield prisma_2.default.serviceRecord.findUniqueOrThrow({
+        where: {
+            serviceId: id
+        }
+    });
     const result = yield prisma_2.default.serviceRecord.findUnique({
         where: {
             serviceId: id
@@ -34,6 +39,11 @@ const getSingleServiceFromDB = (id) => __awaiter(void 0, void 0, void 0, functio
     return result;
 });
 const completeServiceIntoDB = (id, completionDate) => __awaiter(void 0, void 0, void 0, function* () {
+    yield prisma_2.default.serviceRecord.findUniqueOrThrow({
+        where: {
+            serviceId: id,
+        }
+    });
     const result = yield prisma_2.default.serviceRecord.update({
         where: {
             serviceId: id,
@@ -66,11 +76,10 @@ const getOlderServicesFromDB = () => __awaiter(void 0, void 0, void 0, function*
     });
     return result;
 });
-exports.getOlderServicesFromDB = getOlderServicesFromDB;
 exports.ServicesRecordService = {
     createServiceIntoDB,
     getAllServicesFromDB,
     getSingleServiceFromDB,
     completeServiceIntoDB,
-    getOlderServicesFromDB: exports.getOlderServicesFromDB
+    getOlderServicesFromDB
 };

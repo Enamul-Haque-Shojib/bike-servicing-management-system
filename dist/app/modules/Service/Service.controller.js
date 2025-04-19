@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.BikeController = void 0;
+exports.ServiceRecordController = void 0;
 const sendResponse_1 = __importDefault(require("../../shared/sendResponse"));
 const http_status_1 = __importDefault(require("http-status"));
 const Service_service_1 = require("./Service.service");
@@ -36,7 +36,7 @@ const getAllServices = (req, res, next) => __awaiter(void 0, void 0, void 0, fun
         (0, sendResponse_1.default)(res, {
             statusCode: http_status_1.default.OK,
             success: true,
-            message: "Services fetched successfully",
+            message: "Service records fetched successfully",
             data: result
         });
     }
@@ -44,15 +44,27 @@ const getAllServices = (req, res, next) => __awaiter(void 0, void 0, void 0, fun
         next(err);
     }
 });
-const getSingleService = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+const getSingleOrOlderService = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const result = yield Service_service_1.ServicesRecordService.getSingleServiceFromDB(req.params.id);
-        (0, sendResponse_1.default)(res, {
-            statusCode: http_status_1.default.OK,
-            success: true,
-            message: "service fetched successfully",
-            data: result
-        });
+        const { id } = req.params;
+        if (id === 'status') {
+            const result = yield Service_service_1.ServicesRecordService.getOlderServicesFromDB();
+            (0, sendResponse_1.default)(res, {
+                statusCode: http_status_1.default.OK,
+                success: true,
+                message: "Overdue or pending services fetched successfully",
+                data: result
+            });
+        }
+        else {
+            const result = yield Service_service_1.ServicesRecordService.getSingleServiceFromDB(req.params.id);
+            (0, sendResponse_1.default)(res, {
+                statusCode: http_status_1.default.OK,
+                success: true,
+                message: "service record fetched successfully",
+                data: result
+            });
+        }
     }
     catch (err) {
         next(err);
@@ -73,24 +85,9 @@ const completeService = (req, res, next) => __awaiter(void 0, void 0, void 0, fu
         next(err);
     }
 });
-const getOlderServices = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const result = yield Service_service_1.ServicesRecordService.getOlderServicesFromDB();
-        (0, sendResponse_1.default)(res, {
-            statusCode: http_status_1.default.OK,
-            success: true,
-            message: "Overdue or pending services fetched successfully",
-            data: result
-        });
-    }
-    catch (err) {
-        next(err);
-    }
-});
-exports.BikeController = {
+exports.ServiceRecordController = {
     createService,
     getAllServices,
-    getSingleService,
+    getSingleOrOlderService,
     completeService,
-    getOlderServices
 };

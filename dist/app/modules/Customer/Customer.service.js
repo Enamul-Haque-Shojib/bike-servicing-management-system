@@ -25,6 +25,11 @@ const getAllCustomersFromDB = () => __awaiter(void 0, void 0, void 0, function* 
     return result;
 });
 const getSingleCustomerFromDB = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    yield prisma_1.default.customer.findUniqueOrThrow({
+        where: {
+            customerId: id,
+        }
+    });
     const result = yield prisma_1.default.customer.findUnique({
         where: {
             customerId: id
